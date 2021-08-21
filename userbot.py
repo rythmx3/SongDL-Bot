@@ -35,7 +35,7 @@ async def alive(client, message: Message):
 async def song(client, message: Message):
     if len(message.command) < 2:
        return await message.reply("**Usage:** - `!song [query]`")
-    query = message.text.split(None, 1)[1]
+    query = message.command[1]
     user_name = message.from_user.first_name
     shed = await message.reply("🔎 Finding the Song...")
     opts = {
