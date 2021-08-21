@@ -9,39 +9,32 @@ import aiohttp
 import json
 from youtube_dl import YoutubeDL
 from pyrogram import filters, Client, idle
+from pyrogram.types import Message
 from youtubesearchpython import SearchVideos
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup 
-from config import API_ID, API_HASH, BOT_TOKEN
+from config import API_ID, API_HASH, SESSION
 
 
 # logging
-bot = Client(
-   "Song Downloader",
+client = Client(
+   session_name=SESSION,
    api_id=API_ID,
    api_hash=API_HASH,
-   bot_token=BOT_TOKEN,
 )
 
 
-@bot.on_message(filters.command("start") & ~filters.edited)
-async def start(_, message):
+@Client.on_message(filters.command('alive', prefixes='!') & ~filters.edited)
+async def alive(client, message: Message):
    if message.chat.type == 'private':
-       await message.reply("**Hey There, I'm a song downloader bot.\nUsage:** `/song [query]`",   
-                            reply_markup=InlineKeyboardMarkup(
-                                [[
-                                     InlineKeyboardButton(
-                                            "Source", url="https://github.com/me-piro-786/SongDL-Bot")
-                                    ]]
-                            ))
+       return
    else:
-      await message.reply("**Song DL Bot is Online ✨**")
+       await message.reply("`I am Alive! ✨`")
 
 
 
-@bot.on_message(filters.command("song") & ~filters.edited)
-async def song(_, message):
+@Client.on_message(filters.command('song', prefixes='!') & ~filters.edited)
+async def song(client, message: Message):
     if len(message.command) < 2:
-       return await message.reply("**Usage:**\n - `/song [query]`")
+       return await message.reply("**Usage:** - `!song [query]`")
     query = message.text.split(None, 1)[1]
     user_name = message.from_user.first_name
     shed = await message.reply("🔎 Finding the Song...")
@@ -103,5 +96,5 @@ async def song(_, message):
     except Exception as e:
         print(e)
 
-bot.start()
+client.start()
 idle()
