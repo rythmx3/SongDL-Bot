@@ -22,7 +22,7 @@ client = Client(
 )
 
 
-@Client.on_message(filters.command('alive', prefixes='!') & ~filters.edited)
+@client.on_message(filters.command('alive', prefixes='!'))
 async def alive(client, message: Message):
    if message.chat.type == 'private':
        return
@@ -31,7 +31,7 @@ async def alive(client, message: Message):
 
 
 
-@Client.on_message(filters.command('song', prefixes='!') & ~filters.edited)
+@client.on_message(filters.command('song', prefixes='!'))
 async def song(client, message: Message):
     if len(message.command) < 2:
        return await message.reply("**Usage:** - `!song [query]`")
