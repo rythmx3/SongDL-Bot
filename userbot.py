@@ -32,12 +32,14 @@ async def alive(client, message: Message):
 
 
 @client.on_message(filters.command('song', prefixes='!'))
-async def song(client, message: Message):
+async def song(_, message):
     if len(message.command) < 2:
-       return await message.reply("**Usage:** - `!song [query]`")
-    query = message.command[1]
+        await message.reply_text("**Usage:** - `!song [query]`")
+        return
+    
+    query = message.text.split(None, 1)[1]
     user_name = message.from_user.first_name
-    shed = await message.reply("🔎 Finding the Song...")
+    shed = await message.reply_text("🔎 Finding the Song...")
     opts = {
         "format": "bestaudio",
         "addmetadata": True,
