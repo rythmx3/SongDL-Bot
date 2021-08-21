@@ -9,8 +9,8 @@
     ],
     "repository": "https://github.com/me-piro-786/SongDL-Bot",
     "env": {
-        "BOT_TOKEN": {
-            "description": "Your Telegram Bot Token from @BotFather",
+        "SESSION": {
+            "description": "A Pyrogram String Session",
             "value": ""
         }
     },
