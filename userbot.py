@@ -32,7 +32,7 @@ async def alive(client, message: Message):
 
 
 @client.on_message(filters.command('song', prefixes='!'))
-async def song(_, message):
+async def song(client, message: Message):
     if len(message.command) < 2:
         await message.reply_text("**Usage:** - `!song [query]`")
         return
