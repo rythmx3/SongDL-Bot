@@ -26,7 +26,7 @@ bot = Client(
 @bot.on_message(filters.command("start") & ~filters.edited)
 async def start(_, message):
    if message.chat.type == 'private':
-       await message.reply("**Hey There, I'm a song downloader bot.\nUsage:** `/song [query]`",   
+       await message.reply("**Hey There, I'm a song downloader bot.\nUsage:** `/s [query]`",   
                             reply_markup=InlineKeyboardMarkup(
                                 [[
                                      InlineKeyboardButton(
@@ -38,10 +38,10 @@ async def start(_, message):
 
 
 
-@bot.on_message(filters.command("song") & ~filters.edited)
+@bot.on_message(filters.command("s") & ~filters.edited)
 async def song(_, message):
     if len(message.command) < 2:
-       return await message.reply("**Usage:**\n - `/song [query]`")
+       return await message.reply("**Usage:**\n - `/s [query]`")
     query = message.text.split(None, 1)[1]
     user_name = message.from_user.first_name
     shed = await message.reply("🔎 Finding the Song...")
