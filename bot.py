@@ -38,10 +38,10 @@ async def start(_, message):
 
 
 
-@bot.on_message(filters.command("s") & ~filters.edited)
+@bot.on_message(filters.command("song") & ~filters.edited)
 async def song(_, message):
     if len(message.command) < 2:
-       return await message.reply("**Usage:**\n - `/s [query]`")
+       return await message.reply("**Usage:**\n - `/song [query]`")
     query = message.text.split(None, 1)[1]
     user_name = message.from_user.first_name
     shed = await message.reply("🔎 Finding the Song...")
